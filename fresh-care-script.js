@@ -1,3 +1,31 @@
+// Dark Mode Toggle
+const themeToggle = document.getElementById("themeToggle");
+const html = document.documentElement;
+const body = document.body;
+
+// Check for saved theme preference or default to light mode
+const currentTheme = localStorage.getItem("theme") || "light";
+if (currentTheme === "dark") {
+  body.classList.add("dark-mode");
+  updateThemeIcon("light");
+} else {
+  updateThemeIcon("dark");
+}
+
+function updateThemeIcon(nextTheme) {
+  const icon = themeToggle.querySelector(".theme-icon");
+  icon.textContent = nextTheme === "dark" ? "🌙" : "☀️";
+}
+
+themeToggle.addEventListener("click", () => {
+  body.classList.toggle("dark-mode");
+
+  // Update localStorage and icon
+  const isDarkMode = body.classList.contains("dark-mode");
+  localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+  updateThemeIcon(isDarkMode ? "light" : "dark");
+});
+
 // Mobile Menu Toggle
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
